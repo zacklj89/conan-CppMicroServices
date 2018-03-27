@@ -1,7 +1,7 @@
 from conans import ConanFile, CMake
 import os
 
-class OptionalConanPackageTest(ConanFile):
+class CppMicroServicesConanTestPackage(ConanFile):
     settings =  {
                     'os': None,
                     'compiler': None,
@@ -12,13 +12,14 @@ class OptionalConanPackageTest(ConanFile):
     build_policy = 'missing'
 
     def build(self):
-        cmake = CMake(self.settings)
-        self.run('cmake "{!s}" {!s}'.format(self.conanfile_directory, cmake.command_line))
-        self.run('cmake --build . {!s}'.format(cmake.build_config))
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
 
     def imports(self):
         self.copy(pattern='*', dst='bin', src='bin')
+        self.copy(pattern='*', dst='lib', src='lib')
         self.copy(pattern='*.dylib', dst='bin', src='lib')
 
     def test(self):
-        self.run(os.sep.join(['.', 'bin', 'OptionalPackageTest']))
+        self.run(os.sep.join(['.', 'bin', 'CppMicroServicesConanTestPackage']))
