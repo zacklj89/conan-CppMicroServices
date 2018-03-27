@@ -13,7 +13,7 @@ set( CMAKE_CXX_STANDARD_REQUIRED  OFF )
 set( CMAKE_CXX_EXTENSIONS  OFF )
 
 include( "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake" )
-conan_basic_setup( TARGETS )
+conan_basic_setup( TARGETS KEEP_RPATHS)
 # supress cmake warnings about unused variables that conan passes in
 set( _ignore_me  ${CONAN_EXPORTED} )
 

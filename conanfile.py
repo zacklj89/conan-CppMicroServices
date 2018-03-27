@@ -68,6 +68,11 @@ class CppMicroServicesConan(ConanFile):
 
     def package_info(self):
         # let consuming projects know what library name is used for linking
-        base_lib_name = '{!s}{!s}'.format(self.name, self._major_version)
+        if ( self.settings.os == 'Macos'):
+            base_lib_name = '{!s}.{!s}'.format(self.name, self.version)
+        elif ( self.settings.compiler == 'gcc'):
+            base_lib_name = self.name
+        else:
+            base_lib_name = '{!s}{!s}'.format(self.name, self._major_version)
         self.cpp_info.release.libs = [base_lib_name]
         self.cpp_info.debug.libs = [base_lib_name + 'd']
