@@ -12,6 +12,7 @@ class CppMicroServicesConan(ConanFile):
     settings = 'os', 'compiler', 'arch', 'build_type'
     exports_sources = 'CMakeLists.txt', 'cmake*', 'include*', 'src*'
     generators = 'cmake'
+    build_policy = 'missing'
 
     @property
     def _archive_dirname(self):
